@@ -1,0 +1,50 @@
+server:
+  port:
+    8082
+  servlet:
+    context-path: /loan-services/api
+spring:
+  profiles:
+    active: ${ENVIRONMENT}
+  application:
+    name:
+      loan-services-wr
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${SECURITY_RESOURCE_SERVER_URI}
+      client:
+        registration:
+          sso-client:
+            provider: sso-provider
+            client-id: ${SECURITY_REGISTRATION_CLIENT_ID}
+            client-secret: ${SECURITY_REGISTRATION_CLIENT_SECRET}
+            authorization-grant-type: client_credentials
+            scope: openid
+        provider:
+          sso-provider:
+            token-uri: ${SECURITY_CLIENT_PROVIDER_URI}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DOMAIN_DATASOURCE_URL}
+    username: ${DOMAIN_DATASOURCE_USERNAME}
+    password: ${DOMAIN_DATASOURCE_PASSWORD}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    showSql: true
+    properties:
+      format_sql: false
+      hibernate:
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        jdbc:
+          batch_size: 50
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+        generate_statistics: false
+        dialect: org.hibernate.dialect.MySQLDialect
+        lock:
+          timeout: 5000

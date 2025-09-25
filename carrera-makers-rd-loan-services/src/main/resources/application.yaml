@@ -1,0 +1,31 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: ${ENVIRONMENT}
+  webflux:
+    base-path: /loan-services/api
+  application:
+    name: loan-services-rd
+  main:
+    web-application-type: reactive
+  r2dbc:
+    url: ${DOMAIN_R2DBC_URL}
+    username: ${DOMAIN_R2DBC_USERNAME}
+    password: ${DOMAIN_R2DBC_PASSWORD}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${SECURITY_RESOURCE_SERVER_URI}
+      client:
+        registration:
+          sso-client:
+            provider: sso-provider
+            client-id: ${SECURITY_REGISTRATION_CLIENT_ID}
+            client-secret: ${SECURITY_REGISTRATION_CLIENT_SECRET}
+            authorization-grant-type: client_credentials
+            scope: openid
+        provider:
+          sso-provider:
+            token-uri: ${SECURITY_CLIENT_PROVIDER_URI}

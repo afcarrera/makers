@@ -1,0 +1,12 @@
+server:
+  port: 8191
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/mk-sso
+      client:
+        provider:
+          sso-provider:
+            token-uri: http://localhost:8080/realms/mk-sso/protocol/openid-connect/token

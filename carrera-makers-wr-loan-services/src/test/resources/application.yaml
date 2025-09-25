@@ -1,0 +1,44 @@
+server:
+  port:
+    8082
+  servlet:
+    context-path: /loan-services/api
+spring:
+  profiles:
+    active: test
+  application:
+    name:
+      loan-services-wr
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: issuer-uri-test
+      client:
+        registration:
+          sso-client:
+            provider: sso-provider
+            client-id: client-id-test
+            client-secret: client-secret-test
+            authorization-grant-type: client_credentials
+            scope: openid
+        provider:
+          sso-provider:
+            token-uri: token-uri-test
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username:
+    password:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+crypto:
+  algorithm: DSA
+  transformation: DSA
+  iv-size: 0
+  hash-algorithm: SHA256
+  salt-size: 0
+  key-size: 0
+  hash-iterations: 0
+  passphrase: PASSPHRASE
