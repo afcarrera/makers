@@ -35,8 +35,7 @@ public class Loan {
     @Max(value = 360, message = "El plazo no puede ser mayor a 360", groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
     private Integer term;
 
-    @NotNull(groups = ValidationGroups.Create.class)
-    @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$", groups = {ValidationGroups.Create.class, ValidationGroups.Update.class})
+    @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$", groups = {ValidationGroups.Update.class})
     private String statusId;
 
     @JsonIgnore

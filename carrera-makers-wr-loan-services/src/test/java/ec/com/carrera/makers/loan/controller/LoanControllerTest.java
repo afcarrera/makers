@@ -1,6 +1,7 @@
 package ec.com.carrera.makers.loan.controller;
 
 import ec.com.carrera.makers.loan.entity.Loan;
+import ec.com.carrera.makers.loan.entity.LoanStatus;
 import ec.com.carrera.makers.loan.service.LoanService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -26,38 +25,40 @@ public class LoanControllerTest {
     private MockMvc mockMvc;
 
     @Mock
-    private LoanService domainService;
+    private LoanService loanService;
 
     @InjectMocks
-    private LoanController domainController;
+    private LoanController loanController;
 
     String domainJson;
 
     String id;
 
-    Loan domain;
+    Loan loan;
 
     @BeforeEach
     void setup() {
-        mockMvc = MockMvcBuilders.standaloneSetup(domainController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(loanController).build();
         domainJson = """
                 {
                     "id": "a744542d-a842-48c5-bec6-7a687aa93a15",
                     "userId": "a744542d-a842-48c5-bec6-7a687aa93a15",
                     "amount": 1000,
-                    "term": 12
+                    "term": 12,
+                    "statusId": "11111111-1111-1111-1111-111111111111"
                 }
                 """;
         id = "a744542d-a842-48c5-bec6-7a687aa93a15";
-        domain = new Loan();
-        domain.setId(id);
+        loan = new Loan();
+        loan.setId(id);
+        loan.setStatusId("11111111-1111-1111-1111-111111111111");
     }
 
     @Test
     void testCreate() throws Exception {
-        when(domainService.create(any(ec.com.carrera.makers.loan.dto.Loan.class))).thenReturn(domain);
+        when(loanService.create(any(ec.com.carrera.makers.loan.dto.Loan.class))).thenReturn(loan);
 
-        mockMvc.perform(post("/v1/domains")
+        mockMvc.perform(post("/v1/loans")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(domainJson))
                 .andExpect(status().isCreated())
@@ -66,9 +67,9 @@ public class LoanControllerTest {
 
     @Test
     void testUpdate() throws Exception {
-        when(domainService.update(any(ec.com.carrera.makers.loan.dto.Loan.class))).thenReturn(domain);
+        when(loanService.update(any())).thenReturn(loan);
 
-        mockMvc.perform(patch("/v1/domains/1")
+        mockMvc.perform(patch("/v1/loans/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(domainJson))
                 .andExpect(status().isOk())

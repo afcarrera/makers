@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("v1/domains")
+@RequestMapping("v1/loans")
 @FieldDefaults(makeFinal = true, level = lombok.AccessLevel.PRIVATE)
 public class LoanController {
 
@@ -27,7 +27,7 @@ public class LoanController {
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_admin')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Loan> update(@Validated(ValidationGroups.Update.class) @RequestBody @Valid ec.com.carrera.makers.loan.dto.Loan domain, @PathVariable String id) {
         domain.setId(id);
         return ResponseEntity.ok(domainService.update(domain));

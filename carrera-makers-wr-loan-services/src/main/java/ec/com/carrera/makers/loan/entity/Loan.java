@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "loan")
+@Table(name = "loans")
 public class Loan {
 
     @Id
@@ -26,13 +26,15 @@ public class Loan {
     @Column(nullable = false)
     private Integer term;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "status_id", nullable = false)
-    private LoanStatus status;
+    @Column(name = "status_id", nullable = false)
+    private String statusId;
 
     @Column(name = "creation_date", updatable = false, insertable = false)
     private LocalDateTime creationDate;
 
     @JoinColumn(name = "user_id", nullable = false)
     private String userId;
+
+    @Transient
+    private String previousStatusId;
 }

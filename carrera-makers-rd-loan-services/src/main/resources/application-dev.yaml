@@ -5,8 +5,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/lt-sso
+          issuer-uri: http://localhost:8080/realms/mk-sso
       client:
         provider:
           sso-provider:
-            token-uri: http://localhost:8080/realms/lt-sso/protocol/openid-connect/token
+            token-uri: http://localhost:8080/realms/mk-sso/protocol/openid-connect/token

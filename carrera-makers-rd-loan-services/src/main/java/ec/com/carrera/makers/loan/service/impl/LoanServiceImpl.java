@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -33,7 +32,7 @@ public class LoanServiceImpl implements LoanService {
     public Mono<List<Loan>> getLoans() {
         return securityService.getUserId()
                 .flatMap(userId ->
-                        loanRepository.findByUserId(userId) // Mono<List<Loan>>
+                        loanRepository.findByUserId(userId)
                                 .flatMap(loan ->
                                         loanStatusService.getLoanStatusById(loan.getStatusId())
                                                 .map(loanStatus -> {

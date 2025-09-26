@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-@Table("loans")
+@Table("loan_status")
 public class LoanStatus {
 
     @Id

@@ -27,9 +27,9 @@ spring:
             token-uri: ${SECURITY_CLIENT_PROVIDER_URI}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DOMAIN_DATASOURCE_URL}
-    username: ${DOMAIN_DATASOURCE_USERNAME}
-    password: ${DOMAIN_DATASOURCE_PASSWORD}
+    url: ${LOAN_DATASOURCE_URL}
+    username: ${LOAN_DATASOURCE_USERNAME}
+    password: ${LOAN_DATASOURCE_PASSWORD}
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

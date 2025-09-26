@@ -40,6 +40,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	implementation 'org.springdoc:springdoc-openapi-starter-webflux-api:2.8.6'
+	implementation "org.ehcache:ehcache:3.11.0"
+	implementation "javax.cache:cache-api:1.1.1"
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	runtimeOnly 'io.asyncer:r2dbc-mysql'
@@ -49,6 +51,7 @@ dependencies {
 	testImplementation 'io.r2dbc:r2dbc-h2'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation "org.mockito:mockito-junit-jupiter"
 }
 
 dependencyManagement {

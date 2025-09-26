@@ -31,6 +31,9 @@ public class Loan {
     @Transient
     private LoanStatus status;
 
+    @Column("user_id")
+    private String userId;
+
     public Loan() {
         super();
         id = String.valueOf(UUID.randomUUID());
