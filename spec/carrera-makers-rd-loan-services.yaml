@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8190/loan-services/api
+    description: Generated server url
+paths:
+  /v1/loans:
+    get:
+      tags:
+        - loan-controller
+      operationId: getAll
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Loan'
+  /v1/loans/{id}:
+    get:
+      tags:
+        - loan-controller
+      operationId: getLoanById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Loan'
+components:
+  schemas:
+    Loan:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+        term:
+          type: integer
+          format: int32
+        statusId:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/LoanStatus'
+        userId:
+          type: string
+    LoanStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string

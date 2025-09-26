@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8191/loan-services/api
+    description: Generated server url
+paths:
+  /v1/loans:
+    post:
+      tags:
+        - loan-controller
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Loan'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Loan'
+  /v1/loans/{id}:
+    patch:
+      tags:
+        - loan-controller
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Loan'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Loan'
+components:
+  schemas:
+    Loan:
+      type: object
+      properties:
+        id:
+          type: string
+          readOnly: true
+        userId:
+          type: string
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+        amount:
+          type: number
+          minimum: 0.01
+        term:
+          type: integer
+          format: int32
+          maximum: 360
+          minimum: 1
+        statusId:
+          type: string
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+      required:
+        - amount
+        - statusId
+        - term
+        - userId
